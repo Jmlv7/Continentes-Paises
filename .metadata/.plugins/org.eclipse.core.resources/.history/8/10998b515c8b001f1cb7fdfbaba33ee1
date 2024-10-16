@@ -1,0 +1,52 @@
+import java.util.Scanner;
+
+public class ImpostoDeRenda {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Digite a renda anual com salário:");
+        double rendaAnualSalario = scanner.nextDouble();
+        System.out.println("Digite a renda anual com prestação de serviços:");
+        double rendaServicos = scanner.nextDouble();
+        System.out.println("Digite a renda anual com ganho de capital:");
+        double rendaCapital = scanner.nextDouble();
+        System.out.println("Digite os gastos médicos anuais:");
+        double gastosMedicos = scanner.nextDouble();
+        System.out.println("Digite os gastos educacionais anuais:");
+        double gastosEducacionais = scanner.nextDouble();
+
+        double rendaMensalSalario = rendaAnualSalario / 12;
+        double impostoSalario;
+
+        if (rendaMensalSalario < 3000) {
+            impostoSalario = 0;
+        } else if (rendaMensalSalario < 5000) {
+            impostoSalario = rendaAnualSalario * 0.10;
+        } else {
+            impostoSalario = rendaAnualSalario * 0.20;
+        }
+
+        double impostoServicos = rendaServicos * 0.15;
+        double impostoCapital = rendaCapital * 0.20;
+
+        double impostoBruto = impostoSalario + impostoServicos + impostoCapital;
+        double totalGastos = gastosMedicos + gastosEducacionais;
+        double limiteAbatimento = impostoBruto * 0.30;
+        double abatimento = Math.min(totalGastos, limiteAbatimento);
+
+        double impostoDevido = impostoBruto - abatimento;
+
+        System.out.printf("### RELATÓRIO DE IMPOSTO DE RENDA ###\n");
+        System.out.printf("* CONSOLIDADO DE RENDA:\n");
+        System.out.printf("Imposto sobre salário: %.2f\n", impostoSalario);
+        System.out.printf("Imposto sobre serviços: %.2f\n", impostoServicos);
+        System.out.printf("Imposto sobre ganho de capital: %.2f\n", impostoCapital);
+        System.out.printf("* DEDUÇÕES:\n");
+        System.out.printf("Máximo dedutível: %.2f\n", limiteAbatimento);
+        System.out.printf("Gastos dedutíveis: %.2f\n", abatimento);
+        System.out.printf("* RESUMO:\n");
+        System.out.printf("Imposto bruto total: %.2f\n", impostoBruto);
+        System.out.printf("Abatimento: %.2f\n", abatimento);
+        System.out.printf("Imposto devido: %.2f\n", impostoDevido);
+    }
+}
